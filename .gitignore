@@ -1,2 +1,6 @@
 foo*.*
 output*.*
+venv
+
+# ide
+.vscode
