@@ -1,6 +1,7 @@
 foo*.*
 output*.*
 venv
+data
 
 # ide
 .vscode
