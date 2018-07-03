@@ -10,6 +10,32 @@ import image_slicer
 def get_square(w, h):
     return (w, w) if w >= h else (h, h)
 
+def get_background_size(w, h, ww = 1, hh = 1, ow = 0, oh = 0):
+    '''
+    w, h => image's size
+    ww, hh => prefered ratio
+    ow, oh => offset
+    '''
+    prefered_ratio = ww / hh
+    rw, rh = 0, 0
+    if w > h:
+        if prefered_ratio <= 1.0:
+            rw = w 
+            rh = h / prefered_ratio
+        else:
+            rw = w 
+            rh = h / prefered_ratio
+    elif w <= h:
+        if prefered_ratio <= 1.0:
+            rw = w / prefered_ratio
+            rh = h
+        else:
+            rw = w
+            rh = h * prefered_ratio
+    return (
+        int(rw + ow),
+        int(rh + oh)
+    )
 
 def get_square_image(img):
     img_w, img_h = img.size

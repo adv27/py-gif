@@ -9,7 +9,9 @@ import time
 def get_square(w, h):
   return (w, w) if w >= h else (h, h)
 
-def square_frames(image):
+def square_frames(image:Image):
+    img_w, img_h = image.size
+    square = get_square(img_w, img_h)
     with Image.new('RGB', square,(255,255,255)) as background:
         bg_w, bg_h = background.size
         offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
@@ -23,18 +25,18 @@ def square_frames(image):
         except EOFError:
             pass
 
-folder = r'C:\Users\vdanh\Desktop\python\GIF'
-name = 'source.gif'
+folder = r'C:\Users\Dinh Anh Vu\Desktop\python\py-gif'
+name = 'Midnight_reunion_(40_frames,_30_s).gif'
 
 time_start = time.time()
 with Image.open(os.path.join(folder,name)) as img:
     img_w, img_h = img.size
     duration = img.info['duration']
-    print('Source info: {}\n{}'.format(img.info, img.size))
-    square = get_square(img_w, img_h)
+    print('Source info: {}\n{}\n{} frames'.format(img.info, img.size, img.n_frames))
 
     # images = []
     # try:
+    #     square = get_square(img_w, img_h)
     #     background = Image.new('RGB', square,(255,255,255))
     #     bg_w, bg_h = background.size
     #     offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
