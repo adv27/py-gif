@@ -5,7 +5,7 @@ import imageio
 import numpy
 import time
 import image_slicer
-
+from fractions import Fraction
 
 def get_square(w, h):
     return (w, w) if w >= h else (h, h)
@@ -16,22 +16,22 @@ def get_background_size(w, h, ww = 1, hh = 1, ow = 0, oh = 0):
     ww, hh => prefered ratio
     ow, oh => offset
     '''
-    prefered_ratio = ww / hh
+    prefered_ratio = Fraction(ww, hh)
+    # prefered_ratio = ww/ hh
     rw, rh = 0, 0
-    if w > h:
-        if prefered_ratio <= 1.0:
-            rw = w 
-            rh = h / prefered_ratio
-        else:
-            rw = w 
-            rh = h / prefered_ratio
-    elif w <= h:
-        if prefered_ratio <= 1.0:
-            rw = w / prefered_ratio
-            rh = h
-        else:
+    if prefered_ratio < 1:
+        rw = w
+        rh = w / prefered_ratio
+    elif prefered_ratio > 1:
+        rw = h * prefered_ratio
+        rh = h
+    else:
+        if w >= h:
             rw = w
-            rh = h * prefered_ratio
+            rh = w
+        else:
+            rw = h
+            rh = h
     return (
         int(rw + ow),
         int(rh + oh)
