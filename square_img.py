@@ -25,13 +25,12 @@ def get_background_size(w, h, ww = 1, hh = 1, ow = 0, oh = 0):
     elif prefered_ratio > 1:
         rw = h * prefered_ratio
         rh = h
+    elif w >= h:
+        rw = w
+        rh = w
     else:
-        if w >= h:
-            rw = w
-            rh = w
-        else:
-            rw = h
-            rh = h
+        rw = h
+        rh = h
     return (
         int(rw + ow),
         int(rh + oh)
